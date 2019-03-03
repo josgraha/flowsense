@@ -1,0 +1,28 @@
+{
+  "name": "@flowsense/core-ui",
+  "version": "0.0.0",
+  "description": "Core UI Component Library",
+  "author": "Joe Graham",
+  "private": true,
+  "module": "es/index.js",
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "package.json"
+    ]
+  },
+  "scripts": {
+    "build": "yarn build-es",
+    "build-es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ../../babel.config.js ./src --out-dir ./es --ignore \"**/*.test.js\"",
+    "clean": "rimraf es",
+    "lint": "eslint .",
+    "lint-test": "eslint . && yarn test",
+    "test": "jest",
+    "test-watch": "yarn test --watch"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  }
+}

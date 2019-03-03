@@ -1,0 +1,79 @@
+{
+  "description": "Flow Sense©: FX Markets Intelligence Monorepo",
+  "author": "Joe Graham",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "projects/*"
+    ],
+    "nohoist": [
+      "functions"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josgraha/flowsense"
+  },
+  "scripts": {
+    "build": "lerna run build",
+    "build-all": "yarn && yarn build && yarn build-firebase",
+    "build-firebase": "cd functions && yarn",
+    "build-next": "cd \"projects/app\" && yarn build",
+    "clean": "lerna run clean && rimraf functions/next",
+    "deploy": "firebase deploy --only hosting,functions",
+    "lint": "lerna run lint",
+    "lint-staged": "lint-staged",
+    "predeploy": "yarn build-all",
+    "preserve": "yarn build-all",
+    "serve": "cross-env NODE_ENV=production && firebase serve --only hosting,functions",
+    "start": "cd \"projects/app\" && yarn dev",
+    "start-firebase": "cd \"functions\" && yarn start",
+    "test": "jest",
+    "update-version": "lerna publish --skip-git --skip-npm --force-publish '*'",
+    "check-packages": "yarn clean && yarn build && yarn test && yarn lint"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-jest": "^24.1.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.5.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "jest": "^24.1.0",
+    "lerna": "^3.3.0",
+    "lerna-changelog": "^0.8.0",
+    "lint-staged": "^7.2.2",
+    "meow": "^5.0.0",
+    "multimatch": "^2.1.0",
+    "prettier": "^1.14.2",
+    "pretty-quick": "^1.6.0",
+    "rimraf": "^2.6.3",
+    "svg-term-cli": "^2.1.1",
+    "tempy": "^0.2.1"
+  },
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged",
+      "pre-push": "yarn lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --trailing-comma es5 --single-quote --write",
+      "git add"
+    ],
+    "yarn.lock": [
+      "git rm --cached"
+    ]
+  }
+}

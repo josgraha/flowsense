@@ -1,0 +1,23 @@
+{
+  "name": "@flowsense/core-data",
+  "version": "0.0.0",
+  "description": "Core Data Library",
+  "author": "Joe Graham",
+  "private": true,
+  "module": "es/index.js",
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "package.json"
+    ]
+  },
+  "scripts": {
+    "build": "yarn build-es",
+    "build-es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ../../babel.config.js ./src --out-dir ./es --ignore \"**/*.test.js\"",
+    "clean": "rimraf es",
+    "lint": "eslint .",
+    "lint-test": "eslint . && yarn test",
+    "test": "jest",
+    "test-watch": "yarn test --watch"
+  },
+  "dependencies": {}
+}
