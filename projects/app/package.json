@@ -1,0 +1,25 @@
+{
+  "name": "@flowsense/app",
+  "version": "0.0.0",
+  "description": "FlowSense App on Next.js",
+  "author": "Joe Graham",
+  "private": true,
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "package.json"
+    ]
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production next build",
+    "dev": "next",
+    "lint": "eslint .",
+    "lint-test": "eslint . && yarn test",
+    "test": "jest",
+    "test-watch": "yarn test --watch"
+  },
+  "dependencies": {
+    "next": "^8.0.3",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  }
+}
