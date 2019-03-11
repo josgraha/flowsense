@@ -1,9 +1,7 @@
 import { DEFAULT_PAGE_SIZE, Sort, paginate } from "./paginate";
+import { findSymbol } from "./find";
 
-const toSymbolColumn = symbol => {
-  const [base, target] = [symbol.slice(0, symbol.length / 2), symbol.slice(symbol.length / 2)];
-  return `${base}/${target}`;
-};
+const withoutSlash = sym => sym.split("/").join("");
 
 const list = (rows = []) => ({
   offset = 0,
@@ -13,9 +11,7 @@ const list = (rows = []) => ({
   symbol
 }) => {
   const hasSymbol = symbol && symbol && symbol.length >= 6 ? true : false;
-  const sym = hasSymbol === true ? toSymbolColumn(symbol) : "";
-  const rowData = hasSymbol ? rows.filter(row => row["sym"] === sym) : rows;
-  console.log(`list: `, { sym, symbol, hasSymbol, numRows: rowData.length });
+  const rowData = hasSymbol ? findSymbol(rows, symbol) : rows;
   return {
     data: paginate(rowData, offset, limit, sortDir, sortCol),
     page: parseInt(offset / limit) + 1,
